@@ -10,7 +10,7 @@ export class EventsListComponent implements OnInit {
 
     ngOnInit() { }
 
-    event = {
+    event1 = {
         id: 1,
         name: 'Angular Connect',
         date: '9/26/2036',
