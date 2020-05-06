@@ -5,7 +5,8 @@ import {
   EventDetailsComponent,
   CreateEventComponent,
   EventRouteActivator,
-  EventListResolverService
+  EventListResolverService,
+  CreateSessionComponent
  } from './events/index';
 import { Error404Component } from './errors/error404/404.component';
 
@@ -18,7 +19,9 @@ const routes: Routes = [
     canActivate:[EventRouteActivator]},
   {path:'404', component:Error404Component},
     {path:'', redirectTo:'/events', pathMatch:'full'},
-    {path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)}
+    {path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule)},
+    {path: 'events/session/new', component: CreateSessionComponent}
+
 ];
 
 @NgModule({
