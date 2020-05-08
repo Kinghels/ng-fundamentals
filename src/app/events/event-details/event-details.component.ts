@@ -8,7 +8,10 @@ import { IEvent, ISessions } from '../shared';
   styleUrls: ['./event-details.component.css']
 })
 export class EventDetailsComponent implements OnInit {
-  addMode
+  event:IEvent
+  addMode: boolean
+  filterBy: string = 'all';
+  sortBy: string = 'name'
   constructor(private service: EventService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -31,5 +34,4 @@ export class EventDetailsComponent implements OnInit {
     this.addMode = false
   }
 
-  event:IEvent
 }
