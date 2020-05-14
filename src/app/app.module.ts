@@ -16,11 +16,18 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 import { EventsAppComponent } from './events-app.component';
 import { NavComponent } from './nav/nav.component'
-import { ToastrService} from './common/toastr.service';
+import { 
+  ToastrService,
+  CollapsibleWellComponent,
+  JQ_TOKEN,
+  SimpleModalComponent
+} from './common/index';
 import { Error404Component } from './errors/error404/404.component'
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CollapsibleWellComponent } from './common/collapsible-well/collapsible-well.component';
+import { ModalTriggerDirective } from './common/modal-trigger.directive';
+
+let jQuery = window['$']
 
 @NgModule({
   declarations: [
@@ -34,7 +41,9 @@ import { CollapsibleWellComponent } from './common/collapsible-well/collapsible-
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -51,7 +60,11 @@ import { CollapsibleWellComponent } from './common/collapsible-well/collapsible-
       useValue: checkDirtyState
     },
     EventListResolverService,
-    AuthService
+    AuthService,
+    {  
+      provide: JQ_TOKEN,
+      useValue: jQuery
+    }
   ],
   bootstrap: [EventsAppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
