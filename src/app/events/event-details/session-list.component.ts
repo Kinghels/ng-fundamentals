@@ -2,6 +2,9 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ISessions } from '../shared';
 import { filter } from 'rxjs/operators';
 import { sha1 } from '@angular/compiler/src/i18n/digest';
+import { UpvoteComponent} from './upvote/upvote.component'
+import { AuthService } from 'src/app/user/auth.service';
+import { VoterService } from './voter.service';
 
 @Component({
   selector: 'session-list',
@@ -14,7 +17,8 @@ export class SessionListComponent implements OnInit, OnChanges {
   @Input() filterBy: string
   @Input() sortBy: string
 
-  constructor() { }
+  constructor(public authService: AuthService,
+    private voterService: VoterService) { }
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     if(this.sessions){
@@ -26,6 +30,25 @@ export class SessionListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+  }
+
+  toggleVote(session: ISessions){
+    if(this.userHasVoted(session)){
+      this.voterService.deleteVoter(session, 
+        this.authService.currentUser.userName)
+    } else{
+      this.voterService.addVoter(session, 
+        this.authService.currentUser.userName)
+    }
+
+    if(this.sortBy === 'votes'){
+      this.filteredSessions.sort(sortByVotesAsc);
+    }
+  }
+
+  userHasVoted(session: ISessions): boolean{
+    return this.voterService.userHasVoted(session,
+       this.authService.currentUser.userName)
   }
 
   filterSessions(filterBy:string){
