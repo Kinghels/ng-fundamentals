@@ -12,6 +12,7 @@ import { VoterService } from './voter.service';
   styleUrls: ['./session-list.component.css'],
 })
 export class SessionListComponent implements OnInit, OnChanges {
+  @Input() eventId:number;
   @Input() sessions:ISessions[]
   @Input() filteredSessions:ISessions[] = []
   @Input() filterBy: string
@@ -34,10 +35,10 @@ export class SessionListComponent implements OnInit, OnChanges {
 
   toggleVote(session: ISessions){
     if(this.userHasVoted(session)){
-      this.voterService.deleteVoter(session, 
+      this.voterService.deleteVoter(this.eventId, session, 
         this.authService.currentUser.userName)
     } else{
-      this.voterService.addVoter(session, 
+      this.voterService.addVoter(this.eventId, session, 
         this.authService.currentUser.userName)
     }
 

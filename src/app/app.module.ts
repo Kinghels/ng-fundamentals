@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http'
 
 import {
   EventsListComponent,
@@ -7,7 +8,6 @@ import {
   EventService,
   EventDetailsComponent,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolverService,
   CreateSessionComponent,
   SessionListComponent,
@@ -28,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalTriggerDirective } from './common/modal-trigger.directive';
 import { UpvoteComponent } from './events/event-details/upvote/upvote.component';
 import { LocationValidatorDirective } from './events/shared/location-validator.directive';
+import { EventResolverService } from './events/event-resolver.service';
 
 let jQuery = window['$']
 
@@ -53,12 +54,13 @@ let jQuery = window['$']
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     EventService, 
     ToastrService,
-    EventRouteActivator,
+    EventResolverService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState
