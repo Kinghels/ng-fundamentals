@@ -4,10 +4,10 @@ import { EventService } from './event.service';
 
 describe('EventService', () => {
   let service: EventService;
+  let mockHttpClient;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(EventService);
+    service = new EventService(mockHttpClient);
   });
 
   it('should be created', () => {

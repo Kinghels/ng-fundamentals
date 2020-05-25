@@ -4,19 +4,10 @@ import { CreateEventComponent } from './create-event.component';
 
 describe('CreateEventComponent', () => {
   let component: CreateEventComponent;
-  let fixture: ComponentFixture<CreateEventComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CreateEventComponent ]
-    })
-    .compileComponents();
-  }));
+  let mockEventService, mockRouter;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateEventComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new CreateEventComponent(mockEventService, mockRouter);
   });
 
   it('should create', () => {

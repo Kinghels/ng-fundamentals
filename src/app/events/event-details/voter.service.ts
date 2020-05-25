@@ -25,11 +25,8 @@ export class VoterService {
   deleteVoter(eventId:number, session: ISessions, voterName: string){
     session.voters = session.voters.filter(v=>v !== voterName);
 
-    let options = {
-      headers: new HttpHeaders({'Content-Type': '/application/json'})
-    }
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
-    this.httpClient.delete(url, options)
+    this.httpClient.delete(url)
     .pipe(catchError(this.handleError('deleteVoter'))).subscribe();
   }
 

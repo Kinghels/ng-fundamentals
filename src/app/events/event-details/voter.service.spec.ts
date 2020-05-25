@@ -1,16 +1,48 @@
 import { TestBed } from '@angular/core/testing';
 
 import { VoterService } from './voter.service';
+import { ISessions } from '../shared';
+import { of } from 'rxjs';
 
 describe('VoterService', () => {
-  let service: VoterService;
+  let service: VoterService,
+  mockHttp;
+  beforeEach(()=>{
+    mockHttp = jasmine.createSpyObj('mockHttp', ['delete', 'post']);
+    service = new VoterService(mockHttp);
+  })
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(VoterService);
+  describe('deleteVoter', () =>{
+    it('should remove the voter from the list of voters', () => {
+      var session = { id: 6, voters: ['joe', 'john']}
+      
+      mockHttp.delete.and.returnValue(of(false));
+
+      service.deleteVoter(3, <ISessions>session, 'joe')
+      
+      expect(session.voters.length).toBe(1);
+      expect(session.voters[0]).toBe('john');
+    });
+
+    it('should call http.delete with the right url', ()=>{
+      var session = { id: 6, voters: ['joe', 'john']}
+      mockHttp.delete.and.returnValue(of(false));
+
+      service.deleteVoter(3, <ISessions>session, 'joe')
+
+      expect(mockHttp.delete).toHaveBeenCalledWith('/api/events/3/sessions/6/voters/joe')
+    });
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+  describe('addVoter', ()=>{
+    it('should call http.post with the right url', ()=>{
+      var session = { id: 6, voters: ['john']}
+      mockHttp.post.and.returnValue(of(false));
+      const url = '/api/events/3/sessions/6/voters/joe'
+
+      service.addVoter(3, <ISessions>session, 'joe')
+
+      expect(mockHttp.post).toHaveBeenCalledWith(url, {}, jasmine.any(Object));
+    })
+  })
 });
