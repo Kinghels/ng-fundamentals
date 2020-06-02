@@ -6,15 +6,15 @@ import { JQ_TOKEN } from './j-query.service';
 })
 export class ModalTriggerDirective implements OnInit {
   private el: HTMLElement;
-  @Input('modal-trigger') modalId:string;
+  @Input('modal-trigger') modalId: string;
 
-  constructor(@Inject(JQ_TOKEN) private $:any
-  , ref: ElementRef) { 
+  constructor(@Inject(JQ_TOKEN) private $: any
+  ,           ref: ElementRef) {
     this.el = ref.nativeElement;
   }
-  
+
   ngOnInit(): void {
-    this.el.addEventListener('click', e=>{
+    this.el.addEventListener('click', e => {
       this.$(`#${this.modalId}`).modal({});
     });
   }

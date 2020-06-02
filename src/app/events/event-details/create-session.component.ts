@@ -8,25 +8,25 @@ import { ISessions, restrictedWords } from '../shared';
   styleUrls: ['./create-session.component.css']
 })
 export class CreateSessionComponent implements OnInit {
-  newSessionForm: FormGroup
-  name: AbstractControl
-  presenter: AbstractControl
-  duration: AbstractControl
-  level: AbstractControl
-  abstract: AbstractControl
+  newSessionForm: FormGroup;
+  name: AbstractControl;
+  presenter: AbstractControl;
+  duration: AbstractControl;
+  level: AbstractControl;
+  abstract: AbstractControl;
 
-  @Output() saveNewSession = new EventEmitter()
-  @Output() cancelNewSession = new EventEmitter()
+  @Output() saveNewSession = new EventEmitter();
+  @Output() cancelNewSession = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
-    this.name = new FormControl('', Validators.required)
-    this.presenter = new FormControl('', Validators.required)
-    this.duration = new FormControl('', Validators.required)
-    this.level = new FormControl('', Validators.required)
-    this.abstract = new FormControl('', [Validators.required, 
-      Validators.maxLength(400), restrictedWords(['foo', 'bar'])])
+    this.name = new FormControl('', Validators.required);
+    this.presenter = new FormControl('', Validators.required);
+    this.duration = new FormControl('', Validators.required);
+    this.level = new FormControl('', Validators.required);
+    this.abstract = new FormControl('', [Validators.required,
+      Validators.maxLength(400), restrictedWords(['foo', 'bar'])]);
 
     this.newSessionForm = new FormGroup({
       name: this.name,
@@ -34,13 +34,13 @@ export class CreateSessionComponent implements OnInit {
       duration: this.duration,
       level: this.level,
       abstract: this.abstract
-    })
+    });
   }
 
   saveSession(formValues){
-    console.log(formValues)
+    console.log(formValues);
 
-    let session:ISessions = {
+    const session: ISessions = {
       id: undefined,
       name: formValues.name,
       presenter: formValues.presenter,
@@ -48,12 +48,12 @@ export class CreateSessionComponent implements OnInit {
       level: formValues.level,
       abstract: formValues.abstract,
       voters: []
-    }
+    };
 
-    this.saveNewSession.emit(session)
+    this.saveNewSession.emit(session);
   }
 
   cancelSession(){
-    this.cancelNewSession.emit()
+    this.cancelNewSession.emit();
   }
 }

@@ -6,18 +6,18 @@ import { ISessions } from '../shared';
 describe('SessionListComponent', () => {
   let component: SessionListComponent;
   let mockAuthService, mockVoterService;
-  
-  beforeEach(()=>{
+
+  beforeEach(() => {
     component = new SessionListComponent(mockAuthService, mockVoterService);
   });
 
-  describe('ngOnChanges', ()=>{
+  describe('ngOnChanges', () => {
     it('should filter the sessions correctly', () => {
-      component.sessions = <ISessions[]>[
+      component.sessions = ([
         {name: 'session 1', level: 'intermediate'},
         {name: 'session 2', level: 'intermediate'},
         {name: 'session 3', level: 'beginner'}
-      ];
+      ] as ISessions[]);
       component.filterBy = 'intermediate';
       component.sortBy = 'name';
       component.eventId = 3;
@@ -28,11 +28,11 @@ describe('SessionListComponent', () => {
     });
 
     it('should sort the sessions correctly', () => {
-      component.sessions = <ISessions[]>[
+      component.sessions = ([
         {name: 'session 1', level: 'intermediate'},
         {name: 'session 3', level: 'intermediate'},
         {name: 'session 2', level: 'beginner'}
-      ];
+      ] as ISessions[]);
       component.filterBy = 'intermediate';
       component.sortBy = 'name';
       component.eventId = 3;
@@ -41,5 +41,5 @@ describe('SessionListComponent', () => {
 
       expect(component.filteredSessions[1].name).toBe('session 3');
     });
-  })
+  });
 });

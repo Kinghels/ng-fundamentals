@@ -8,22 +8,22 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class VoterService {
-  
+
   constructor(private httpClient: HttpClient) { }
 
   addVoter(eventId: number, session: ISessions, voterName: string){
     session.voters.push(voterName);
 
-    let options = {
+    const options = {
       headers: new HttpHeaders({'Content-Type': '/application/json'})
-    }
+    };
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
     this.httpClient.post(url, {}, options)
       .pipe(catchError(this.handleError('addVoter'))).subscribe();
   }
 
-  deleteVoter(eventId:number, session: ISessions, voterName: string){
-    session.voters = session.voters.filter(v=>v !== voterName);
+  deleteVoter(eventId: number, session: ISessions, voterName: string){
+    session.voters = session.voters.filter(v => v !== voterName);
 
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
     this.httpClient.delete(url)
@@ -34,10 +34,10 @@ export class VoterService {
     return session.voters.some(v => v === voterName);
   }
 
-  private handleError<T> (operation= 'operation', result?: T){
+  private handleError<T>(operation= 'operation', result?: T){
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
-    }
+    };
   }
 }

@@ -15,5 +15,5 @@ export class EventsAppComponent implements OnInit {
     this.auth.checkAuthenticationStatus();
   }
 
-  
+
 }

@@ -9,17 +9,17 @@ import { IEvent } from './shared';
 })
 
 export class EventsListComponent implements OnInit {
-    constructor(private service: EventService, private toastr:ToastrService, private route:ActivatedRoute) {
-      
+    constructor(private service: EventService, private toastr: ToastrService, private route: ActivatedRoute) {
+
     }
-    
-    ngOnInit() { 
-      this.events = this.route.snapshot.data['events']
+
+    events: IEvent[];
+
+    ngOnInit() {
+      this.events = this.route.snapshot.data.events;
     }
 
     handleThumbnailClick(eventName){
-      this.toastr.success(eventName)
+      this.toastr.success(eventName);
     }
-
-    events:IEvent[];
 }

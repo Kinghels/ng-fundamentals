@@ -8,22 +8,22 @@ import { ISessions, EventService, IEvent } from '../events';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  searchTerm: string = "";
-  foundSessions :ISessions[];
+  searchTerm = '';
+  foundSessions: ISessions[];
   events: IEvent[];
 
   constructor(public authService: AuthService,
-    private eventService: EventService) { }
+              private eventService: EventService) { }
 
   ngOnInit(): void {
-    this.eventService.getEvents().subscribe(events=>{
+    this.eventService.getEvents().subscribe(events => {
       this.events = events;
-    })
+    });
   }
 
   searchSessions(searchTerm){
-    this.eventService.searchSessions(searchTerm).subscribe(sessions =>{
-      this.foundSessions = sessions
+    this.eventService.searchSessions(searchTerm).subscribe(sessions => {
+      this.foundSessions = sessions;
     });
   }
 }

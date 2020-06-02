@@ -8,18 +8,18 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 export class UpvoteComponent implements OnInit {
   @Input() set voted(val){
     this.iconColor = val ? 'red' : 'white';
-  };
+  }
   iconColor: string;
-  
+
   @Input() count: number;
-  @Output() vote = new EventEmitter
+  @Output() vote = new EventEmitter;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onClick(){
-    this.vote.emit({})
+    this.vote.emit({});
   }
 
 }

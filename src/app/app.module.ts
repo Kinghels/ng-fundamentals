@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   EventsListComponent,
@@ -12,17 +12,17 @@ import {
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe
-} from './events/index'
+} from './events/index';
 import { AppRoutingModule } from './app-routing.module';
 import { EventsAppComponent } from './events-app.component';
-import { NavComponent } from './nav/nav.component'
-import { 
+import { NavComponent } from './nav/nav.component';
+import {
   ToastrService,
   CollapsibleWellComponent,
   JQ_TOKEN,
   SimpleModalComponent
 } from './common/index';
-import { Error404Component } from './errors/error404/404.component'
+import { Error404Component } from './errors/error404/404.component';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalTriggerDirective } from './common/modal-trigger.directive';
@@ -30,7 +30,7 @@ import { UpvoteComponent } from './events/event-details/upvote/upvote.component'
 import { LocationValidatorDirective } from './events/shared/location-validator.directive';
 import { EventResolverService } from './events/event-resolver.service';
 
-let jQuery = window['$']
+const jQuery = window.$;
 
 @NgModule({
   declarations: [
@@ -58,7 +58,7 @@ let jQuery = window['$']
     HttpClientModule
   ],
   providers: [
-    EventService, 
+    EventService,
     ToastrService,
     EventResolverService,
     {
@@ -67,7 +67,7 @@ let jQuery = window['$']
     },
     EventListResolverService,
     AuthService,
-    {  
+    {
       provide: JQ_TOKEN,
       useValue: jQuery
     }
@@ -78,8 +78,8 @@ let jQuery = window['$']
 export class AppModule { }
 
 export function checkDirtyState(component: CreateEventComponent){
-  if(component.isDirty){
-    return window.confirm('You have not saved your work, do you really want to cancel?')
+  if (component.isDirty){
+    return window.confirm('You have not saved your work, do you really want to cancel?');
   }
-  return true
+  return true;
 }

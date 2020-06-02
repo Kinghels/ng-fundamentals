@@ -7,7 +7,7 @@ import { IEvent } from '../shared';
   styleUrls: ['./event-thumbnail.component.css']
 })
 export class EventThumbnailComponent implements OnInit {
-  @Input() event:IEvent
+  @Input() event: IEvent;
 
   constructor() { }
 
@@ -15,8 +15,9 @@ export class EventThumbnailComponent implements OnInit {
   }
 
   getStartTimeClass(){
-    if(this.event && this.event.time === '8:00 am')
-      return ['green', 'bold']
-    return []
+    if (this.event && this.event.time === '8:00 am') {
+      return ['green', 'bold'];
+    }
+    return [];
   }
 }

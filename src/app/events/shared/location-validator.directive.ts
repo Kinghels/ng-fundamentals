@@ -13,12 +13,12 @@ export class LocationValidatorDirective implements Validator{
 
   constructor() { }
   validate(control: FormGroup): ValidationErrors {
-    let addressControl = control.controls['address'];
-    let cityControl = control.controls['city'];
-    let countryControl = control.controls['country'];
-    let urlControl = (<FormGroup>control.root).controls['onlineUrl'];
-    
-    if( (urlControl && urlControl.value) 
+    const addressControl = control.controls.address;
+    const cityControl = control.controls.city;
+    const countryControl = control.controls.country;
+    const urlControl = (control.root as FormGroup).controls.onlineUrl;
+
+    if ( (urlControl && urlControl.value)
       || (addressControl && addressControl.value
         && cityControl && cityControl.value
         && countryControl && countryControl.value)){
@@ -28,7 +28,7 @@ export class LocationValidatorDirective implements Validator{
     }
   }
   registerOnValidatorChange?(fn: () => void): void {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
 }

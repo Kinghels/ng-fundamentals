@@ -7,7 +7,7 @@ describe('EventDetailsComponent', () => {
   let mockEventService, mockRoute;
 
   beforeEach(() => {
-    component = new EventDetailsComponent(mockEventService, mockRoute)
+    component = new EventDetailsComponent(mockEventService, mockRoute);
   });
 
   it('should create', () => {
